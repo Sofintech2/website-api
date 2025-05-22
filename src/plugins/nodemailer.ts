@@ -1,4 +1,6 @@
 import { Transporter } from "nodemailer";
+
+// @ts-ignore:next-line
 import fastifyMailer from 'fastify-mailer';
 import fp from 'fastify-plugin';
 
