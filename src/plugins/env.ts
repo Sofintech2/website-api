@@ -5,6 +5,7 @@ import env from '@fastify/env';
 declare module 'fastify' {
     interface FastifyInstance {
         config: {
+            HOST: string;
             PORT: string;
             NODE_ENV: string;
             SMTP_HOST: string;
@@ -20,6 +21,7 @@ declare module 'fastify' {
 const envSchema = {
     type: 'object',
     required: [
+        'HOST',
         'PORT',
         'SMTP_HOST',
         'SMTP_PORT',
@@ -29,6 +31,7 @@ const envSchema = {
         'MAIL_OUVIDORIA'
     ],
     properties: {
+        HOST: { type: 'string', default: '0.0.0.0' },
         PORT: { type: 'string', default: '3000' },
         NODE_ENV: { type: 'string', default: 'development' },
         SMTP_HOST: { type: 'string' },
