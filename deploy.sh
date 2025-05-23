@@ -9,4 +9,4 @@ echo "buildando versão nova"
 docker build -t website-api .
 
 echo "subindo versão nova"
-docker run -p 8080:8080 --name website-api -d website-api
+docker run -d -p 8080:8080 -v $(pwd)/uploads:/app/uploads --env-file .env --name website-api website-api
