@@ -3,7 +3,7 @@ import { FastifyTypedInstance } from "../types/fastify-typed";
 
 export default async function (app: FastifyTypedInstance) {
     app.get(
-        '/health',
+        '/api/health',
         {
             schema: {
                 description: "Verifica a saúde da aplicação",
