@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { FastifyTypedInstance } from '../types/fastify-typed';
 import { ContatoSchema } from '../schemas/contato.schema';
+import pug from 'pug';
+import path from 'node:path';
 
 export default async function (app: FastifyTypedInstance) {
     app.post(
@@ -18,13 +20,11 @@ export default async function (app: FastifyTypedInstance) {
             },
         },
         async (req, reply) => {
-            const { nome, email, telefone, mensagem } = req.body
-
-            await app.mailer.sendMail({
-                to: app.config.MAIL_CONTATO,
-                subject: "Novo contato no Site",
-                html: `<b>Nome</b>: ${nome}<br /><b>Email</b>: ${email}<br /><b>Telefone</b>: ${telefone}<br /><b>Mensagem</b>: ${mensagem}`,
-            })
+                    await app.mailer.sendMail({
+                        to: app.config.MAIL_CONTATO,
+                        subject: "Novo contao no Site",
+                        html: pug.renderFile(path.join(__dirname, '..', 'templates', 'contato.pug'), req.body),
+                    })
 
             return reply
                 .status(200)

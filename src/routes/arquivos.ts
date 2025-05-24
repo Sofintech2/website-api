@@ -1,14 +1,11 @@
-import { z } from 'zod';
-import { ContatoOuvidoriaSchema } from '../schemas/contato-ouvidoria.schema';
-import { FastifyTypedInstance } from '../types/fastify-typed';
-import { HttpNotAcceptableErrorSchema, HttpNotFoundErrorSchema, HttpValidationErrorSchema } from '../hooks/http-error.schema';
-import { randomUUID } from 'node:crypto'
+import mime from 'mime';
+import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import mime from 'mime'
-import util from 'util'
-import { Multipart, MultipartFile } from '@fastify/multipart';
-import { FindMyWayFindResult } from 'fastify/types/instance';
+import util from 'util';
+import { z } from 'zod';
+import { HttpNotAcceptableErrorSchema, HttpNotFoundErrorSchema, HttpValidationErrorSchema } from '../hooks/http-error.schema';
+import { FastifyTypedInstance } from '../types/fastify-typed';
 
 const pump = util.promisify(require('stream').pipeline)
 const allowedExtensions = ['.png', '.jpg', '.jpeg', '.pdf']
@@ -96,7 +93,7 @@ export default async function (app: FastifyTypedInstance) {
 
                     uploadedFiles.push({
                         originalName: part.filename,
-                        downloadUrl: `/api/download?arquivo=${today}/${requestId}/${part.filename}`
+                        downloadUrl: `${app.config.BASE_URL}/api/download?arquivo=${today}/${requestId}/${part.filename}`
                     })
                 }
             }

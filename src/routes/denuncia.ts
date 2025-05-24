@@ -1,15 +1,18 @@
+import pug from 'pug';
 import { z } from 'zod';
-import { ContatoOuvidoriaSchema } from '../schemas/contato-ouvidoria.schema';
+import { DenunciaSchema } from '../schemas/denuncia.schema';
 import { FastifyTypedInstance } from '../types/fastify-typed';
+import path from 'node:path';
+import { cwd } from 'node:process';
 
 export default async function (app: FastifyTypedInstance) {
     app.post(
-        '/api/ouvidoria',
+        '/api/denuncia',
         {
             schema: {
-                tags: ['ouvidoria'],
-                description: "Registra o contato da pessoa para a ouvidoria da empresa",
-                body: ContatoOuvidoriaSchema,
+                tags: ['denuncia'],
+                description: "Registra a denuncia da pessoa para a ouvidoria da empresa",
+                body: DenunciaSchema,
                 response: {
                     200: z.object({
                         success: z.boolean()
@@ -18,12 +21,10 @@ export default async function (app: FastifyTypedInstance) {
             },
         },
         async (req, reply) => {
-            const { nome, email, telefone, mensagem } = req.body
-
             await app.mailer.sendMail({
                 to: app.config.MAIL_OUVIDORIA,
-                subject: "Nova reclamação no Site",
-                html: `<b>Nome</b>: ${nome || '-'}<br /><b>Email</b>: ${email || '-'}<br /><b>Telefone</b>: ${telefone || '-'}<br /><b>Mensagem</b>: ${mensagem}`,
+                subject: "Nova denúncia/dúvida anônima no Site",
+                html: pug.renderFile(path.join(__dirname, '..', 'templates', 'denuncia.pug'), req.body),
             })
 
             return reply

@@ -1,0 +1,36 @@
+doctype html
+html
+  body
+    h1 Nova denúncia/dúvida anônima no Site
+    div(style="display: flex; flex-direction: column; gap: 10px")
+      div
+        b E-mail: 
+        span= email
+      div
+        b Tipo de Reporte: 
+        span= tipoReporte
+      div
+        b Categoria do Assunto: 
+        span= categoriaAssunto
+      div
+        b Política interna relevante: 
+        span= politicaInterna
+      div
+        b Local do Incidente: 
+        span #{new Date(data).toLocaleString("pt-BR")}
+      div
+        b Data do Incidente: 
+        span= local
+      div
+        b Sugestão de medida para resolver o problema: 
+        span= medidaResolverProblema
+      div
+        b Descrição do Incidente/Dúvida: 
+        p= descricao
+      div
+        b Arquivos: 
+        td
+          ul
+            each item in arquivos
+              li
+                a(href=item.downloadUrl, target="_blank", rel="noopener noreferrer")= item.originalName

@@ -7,6 +7,7 @@ declare module 'fastify' {
         config: {
             HOST: string;
             PORT: string;
+            BASE_URL: string;
             NODE_ENV: string;
             SMTP_HOST: string;
             SMTP_PORT: string;
@@ -23,6 +24,7 @@ const envSchema = {
     required: [
         'HOST',
         'PORT',
+        'BASE_URL',
         'SMTP_HOST',
         'SMTP_PORT',
         'SMTP_USER',
@@ -33,6 +35,7 @@ const envSchema = {
     properties: {
         HOST: { type: 'string', default: '0.0.0.0' },
         PORT: { type: 'string', default: '3000' },
+        BASE_URL: { type: 'string', default: 'http://localhost:3000' },
         NODE_ENV: { type: 'string', default: 'development' },
         SMTP_HOST: { type: 'string' },
         SMTP_PORT: { type: 'string' },
