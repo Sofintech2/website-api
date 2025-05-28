@@ -27,10 +27,11 @@ html
       div
         b Descrição do Incidente/Dúvida: 
         p= descricao
-      div
-        b Arquivos: 
-        td
-          ul
-            each item in arquivos
-              li
-                a(href=item.downloadUrl, target="_blank", rel="noopener noreferrer")= item.originalName
+      if arquivos
+        div
+          b Arquivos: 
+          td
+            ul
+              each item in arquivos
+                li
+                  a(href=item.downloadUrl, target="_blank", rel="noopener noreferrer")= item.originalName
