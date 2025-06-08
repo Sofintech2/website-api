@@ -1,37 +1,76 @@
 doctype html
 html
   body
-    h1 Nova denúncia/dúvida anônima no Site
+    h1 Nova denúncia anônima no Site
     div(style="display: flex; flex-direction: column; gap: 10px")
       div
-        b E-mail: 
-        span= email
+        b Qual a sua relação com a Sofintech? 
+        p= qualSuaRelacaoComAEmpresa
       div
-        b Tipo de Reporte: 
-        span= tipoReporte
-      div
-        b Categoria do Assunto: 
-        span= categoriaAssunto
-      div
-        b Política interna relevante: 
-        span= politicaInterna
-      div
-        b Local do Incidente: 
-        span #{new Date(data).toLocaleString("pt-BR")}
-      div
-        b Data do Incidente: 
-        span= local
-      div
-        b Sugestão de medida para resolver o problema: 
-        span= medidaResolverProblema
-      div
-        b Descrição do Incidente/Dúvida: 
-        p= descricao
-      if arquivos
+        b Você gostaria de se identificar? 
+        p= voceGostariaDeSeIdentificar
+      if voceGostariaDeSeIdentificar == "Sim"
         div
-          b Arquivos: 
+          b Qual seu Nome Completo: 
+          p= nome
+        if email
+          div
+            b E-mail: 
+            p= email
+        if telefone
+          div
+            b Telefone: 
+            p= telefone
+      div
+        b Qual o tipo de denúncia melhor se enquadra ao fato que você está registrando? 
+        p= tipoDeReclamacao
+      if tipoDeReclamacaoOutro
+        div
+          b Especifique o tipo de denúncia que melhor se enquadra ao fato que você está registrando: 
+          p= tipoDeReclamacaoOutro
+      div
+        b Indique a área/setor onde ocorreu o fato que você está denunciando: 
+        p= areaSetor
+      div
+        b Como tomou conhecimento desta fato/transgressão? 
+        p= comoVoceSoube
+      if comoVoceSoubeOutro
+        div
+          b Especifique melhor como tomou conhecimento desta fato/transgressão: 
+          p= comoVoceSoubeOutro
+      div
+        b Você sabe se algum Diretor, Gerente, Coordenador ou Supervisor está CIENTE do problema relatado? 
+        p= alguemEstaCiente
+      div
+        b Você sabe se algum Diretor, Gerente, Coordenador, Supervisor está ENVOLVIDO diretamente no fato relatado? 
+        p= alguemEstaEnvolvido
+      div
+        b Você sabe se algum(ns) Diretor(es), Gerente(s), Coordenador(es) ou Supervisor(es) tentou(ram) ESCONDER o problema relatado? 
+        p= alguemTentouOcultar
+      div
+        b O que você quer denunciar? 
+        p= reclamacao
+      if testemunhas
+        div
+          b Existem testemunhas? Em caso positivo, indique-as. 
+          p= testemunhas
+      if evidencias
+        div
+          b Você sabe se existem evidências sobre o fato? Em caso positivo, indique-as.
+          p= evidencias
+      if valorFinanceiroEnvolvido
+        div
+          b Caso seja possível, indique o valor financeiro envolvido no fato relatado: 
+          p= valorFinanceiroEnvolvido
+      if sugestoesParaResolveraSituacao
+        div
+          b Caso você tenha alguma sugestão de como solucionar o problema, descreva-a: 
+          p= sugestoesParaResolveraSituacao
+      if anexos
+        div
+          b Caso você tenha alguma prova, como fotos, vídeos, áudios, bilhetes ou documentos, anexe-os aqui: 
           td
             ul
-              each item in arquivos
+              each item in anexos
                 li
                   a(href=item.downloadUrl, target="_blank", rel="noopener noreferrer")= item.originalName

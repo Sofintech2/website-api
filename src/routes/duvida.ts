@@ -1,18 +1,18 @@
-import pug from 'pug';
 import { z } from 'zod';
-import { DenunciaSchema } from '../schemas/denuncia.schema';
 import { FastifyTypedInstance } from '../types/fastify-typed';
+import { ContatoSchema } from '../schemas/contato.schema';
+import pug from 'pug';
 import path from 'node:path';
-import { cwd } from 'node:process';
+import { DuvidaSchema } from '../schemas/duvida.schema';
 
 export default async function (app: FastifyTypedInstance) {
     app.post(
-        '/api/denuncia',
+        '/api/duvida',
         {
             schema: {
                 tags: ['complaince'],
-                description: "Registra a denuncia da pessoa para a ouvidoria da empresa",
-                body: DenunciaSchema,
+                description: "Registra a dúvida da pessoa",
+                body: DuvidaSchema,
                 response: {
                     200: z.object({
                         success: z.boolean()
@@ -21,11 +21,11 @@ export default async function (app: FastifyTypedInstance) {
             },
         },
         async (req, reply) => {
-            await app.mailer.sendMail({
-                to: app.config.MAIL_OUVIDORIA,
-                subject: "Nova denúncia anônima no Site",
-                html: pug.renderFile(path.join(__dirname, '..', 'templates', 'denuncia.pug'), req.body),
-            })
+                    await app.mailer.sendMail({
+                        to: app.config.MAIL_CONTATO,
+                        subject: "Nova Dúvida no Site",
+                        html: pug.renderFile(path.join(__dirname, '..', 'templates', 'duvida.pug'), req.body),
+                    })
 
             return reply
                 .status(200)

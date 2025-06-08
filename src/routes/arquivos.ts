@@ -8,13 +8,11 @@ import { HttpNotAcceptableErrorSchema, HttpNotFoundErrorSchema, HttpValidationEr
 import { FastifyTypedInstance } from '../types/fastify-typed';
 
 const pump = util.promisify(require('stream').pipeline)
-const allowedExtensions = ['.png', '.jpg', '.jpeg', '.pdf']
 
 export default async function (app: FastifyTypedInstance) {
     app.register(import('@fastify/multipart'), {
         limits: {
-            fileSize: 2 * 1024 * 1024,
-            files: 5,
+            fileSize: 2 * 1024 * 1024
         }
     })
 
@@ -81,11 +79,6 @@ export default async function (app: FastifyTypedInstance) {
                 if (part.file) {
                     if (part.file.truncated) {
                         return app.httpErrors.badRequest({ error: `Arquivo ${part.filename} excede 2MB.` })
-                    }
-
-                    const ext = path.extname(part.filename).toLowerCase()
-                    if (!allowedExtensions.includes(ext)) {
-                        return app.httpErrors.badRequest({ error: `Extensão não permitida: ${ext}` })
                     }
 
                     const filePath = path.join(uploadDir, part.filename)
