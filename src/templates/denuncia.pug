@@ -2,72 +2,72 @@ doctype html
 html
   body
     h1 Nova denúncia anônima no Site
-    div(style="display: flex; flex-direction: row; gap: 10px")
-      div
+    div
+      div(style="display: block; margin-bottom: 10px;")
         b Qual a sua relação com a Sofintech? 
         p= qualSuaRelacaoComAEmpresa
-      div
+      div(style="display: block; margin-bottom: 10px;")
         b Você gostaria de se identificar? 
         p= voceGostariaDeSeIdentificar
       if voceGostariaDeSeIdentificar == "Sim"
-        div
+        div(style="display: block; margin-bottom: 10px;")
           b Qual seu Nome Completo: 
           p= nome
         if email
-          div
+          div(style="display: block; margin-bottom: 10px;")
             b E-mail: 
             p= email
         if telefone
-          div
+          div(style="display: block; margin-bottom: 10px;")
             b Telefone: 
             p= telefone
-      div
+      div(style="display: block; margin-bottom: 10px;")
         b Qual o tipo de denúncia melhor se enquadra ao fato que você está registrando? 
         p= tipoDeReclamacao
       if tipoDeReclamacaoOutro
-        div
+        div(style="display: block; margin-bottom: 10px;")
           b Especifique o tipo de denúncia que melhor se enquadra ao fato que você está registrando: 
           p= tipoDeReclamacaoOutro
-      div
+      div(style="display: block; margin-bottom: 10px;")
         b Indique a área/setor onde ocorreu o fato que você está denunciando: 
         p= areaSetor
-      div
+      div(style="display: block; margin-bottom: 10px;")
         b Como tomou conhecimento desta fato/transgressão? 
         p= comoVoceSoube
       if comoVoceSoubeOutro
-        div
+        div(style="display: block; margin-bottom: 10px;")
           b Especifique melhor como tomou conhecimento desta fato/transgressão: 
           p= comoVoceSoubeOutro
-      div
+      div(style="display: block; margin-bottom: 10px;")
         b Você sabe se algum Diretor, Gerente, Coordenador ou Supervisor está CIENTE do problema relatado? 
         p= alguemEstaCiente
-      div
+      div(style="display: block; margin-bottom: 10px;")
         b Você sabe se algum Diretor, Gerente, Coordenador, Supervisor está ENVOLVIDO diretamente no fato relatado? 
         p= alguemEstaEnvolvido
-      div
+      div(style="display: block; margin-bottom: 10px;")
         b Você sabe se algum(ns) Diretor(es), Gerente(s), Coordenador(es) ou Supervisor(es) tentou(ram) ESCONDER o problema relatado? 
         p= alguemTentouOcultar
-      div
+      div(style="display: block; margin-bottom: 10px;")
         b O que você quer denunciar? 
         p= reclamacao
       if testemunhas
-        div
+        div(style="display: block; margin-bottom: 10px;")
           b Existem testemunhas? Em caso positivo, indique-as. 
           p= testemunhas
       if evidencias
-        div
+        div(style="display: block; margin-bottom: 10px;")
           b Você sabe se existem evidências sobre o fato? Em caso positivo, indique-as.
           p= evidencias
       if valorFinanceiroEnvolvido
-        div
+        div(style="display: block; margin-bottom: 10px;")
           b Caso seja possível, indique o valor financeiro envolvido no fato relatado: 
           p= valorFinanceiroEnvolvido
       if sugestoesParaResolveraSituacao
-        div
+        div(style="display: block; margin-bottom: 10px;")
           b Caso você tenha alguma sugestão de como solucionar o problema, descreva-a: 
           p= sugestoesParaResolveraSituacao
       if anexos
-        div
+        div(style="display: block; margin-bottom: 10px;")
           b Caso você tenha alguma prova, como fotos, vídeos, áudios, bilhetes ou documentos, anexe-os aqui: 
           td
             ul
