@@ -22,7 +22,7 @@ export default async function (app: FastifyTypedInstance) {
         },
         async (req, reply) => {
                     await app.mailer.sendMail({
-                        to: app.config.MAIL_CONTATO,
+                        to: app.config.MAIL_OUVIDORIA,
                         subject: "Nova Sugestão no Site",
                         html: pug.renderFile(path.join(__dirname, '..', 'templates', 'sugestao.pug'), req.body),
                     })
